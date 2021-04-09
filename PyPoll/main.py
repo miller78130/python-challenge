@@ -4,16 +4,6 @@ import csv
 # Define Pathway
 election_data = os.path.join('Resources','election_data.csv')
 
-#with open(election_data, "r") as csv_file:
-    #reader = csv.reader(csv_file, delimiter=',')
-
-#votes = len(list(reader))
-#actual_votes = votes - 1
-
-#print(f" Actual Total: {actual_votes}")
-# verify pathway is correct
-    #print(reader)
-
 with open(election_data, "r") as infile:
     reader = csv.DictReader(infile)
     data = {}
@@ -31,7 +21,7 @@ candidate = data['Candidate']
 #Get total votes
 total_votes = len(voter_id)
 
-#get total votes and vote count per candidate
+#vote count per candidate
 candidate_1_votes = candidate.count('Khan')
 candidate_2_votes = candidate.count('Correy')
 candidate_3_votes = candidate.count('Li')
@@ -53,14 +43,30 @@ candidate_2_percentage = '{:.2%}'.format(candidate_2_votes / total_votes)
 candidate_3_percentage = '{:.2%}'.format(candidate_3_votes / total_votes)
 candidate_4_percentage = '{:.2%}'.format(candidate_4_votes / total_votes)
 
+#find winner
+votes_list = [candidate_1_votes, candidate_2_votes, candidate_3_votes, candidate_4_votes]
+winning_votes = max(votes_list)
+
+if candidate.count('Khan') > candidate.count('Correy') & candidate.count('Li') & candidate.count("O'Tooley"):
+    winner = 'Khan'
+else:
+    if candidate.count('Correy') > candidate.count('Li') & candidate.count("O'Tooley"):
+        winner = 'Correy'
+    else: 
+        if candidate.count('Li') > candidate.count('Khan') & candidate.count('Correy') & candidate.count("O'Tooley"):
+            winner = 'Li'
+        else:
+            if candidate.count("O'Tooley") > candidate.count('Khan') & candidate.count('Li') & candidate.count('Correy'):
+                winner = "O'Tooley"
 
 print(f'Election Results')
-print(f'-------------------------------------------------------------------------')
+print(f'---------------------------')
 print(f'Total Votes: {total_votes}')
-print(f'-------------------------------------------------------------------------')
+print(f'---------------------------')
 print(f'{candidate_1} {candidate_1_percentage} ({candidate_1_votes})')
 print(f'{candidate_2} {candidate_2_percentage} ({candidate_2_votes})')
 print(f'{candidate_3} {candidate_3_percentage} ({candidate_3_votes})')
 print(f'{candidate_4} {candidate_4_percentage} ({candidate_4_votes})')
-print(f'-------------------------------------------------------------------------')
-#print(f'{winning_candidate')
+print(f'---------------------------')
+print(f'Winner: {winner}')
+print(f'---------------------------')
