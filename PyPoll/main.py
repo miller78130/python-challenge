@@ -70,3 +70,18 @@ print(f'{candidate_4} {candidate_4_percentage} ({candidate_4_votes})')
 print(f'---------------------------')
 print(f'Winner: {winner}')
 print(f'---------------------------')
+
+output_path = os.path.join('Analysis','Analysis.csv')
+with open(output_path, 'w', newline='')as csvfile:
+    csvwriter=csv.writer(csvfile, delimiter=',')
+    csvwriter.writerow(['Election Results'])
+    csvwriter.writerow(['---------------------------------------------'])
+    csvwriter.writerow([f"Total Votes: {total_votes}"])
+    csvwriter.writerow([f'--------------------------------------------'])
+    csvwriter.writerow([f'{candidate_1} {candidate_1_percentage} ({candidate_1_votes})'])
+    csvwriter.writerow([f'{candidate_2} {candidate_2_percentage} ({candidate_2_votes})'])
+    csvwriter.writerow([f'{candidate_4} {candidate_4_percentage} ({candidate_4_votes})'])
+    csvwriter.writerow([f'--------------------------------------------'])
+    csvwriter.writerow([f'Winner: {winner}'])
+    csvwriter.writerow([f'--------------------------------------------'])
+    
